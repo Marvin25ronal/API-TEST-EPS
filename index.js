@@ -81,13 +81,15 @@ app.get('/optionslogin', auth, (req, res) => {
                 "id": 0,
                 "text": "Aspirante",
                 "icon": "user-check",
-                "icon_class": "FontAwesome5"
+                "icon_class": "FontAwesome5",
+                'target': 'Candidate'
             },
             {
                 "id": 1,
                 "text": "Usuario",
                 "icon": "user",
-                "icon_class": "FontAwesome5"
+                "icon_class": "FontAwesome5",
+                'target': 'NormalUser'
             }
         ],
         carrear_type: [
@@ -471,10 +473,481 @@ app.post('/register', (req, res) => {
 
 })
 
+app.get('/logininfo/:id1/:id2', auth, (req, res) => {
+    let data = {
+        email: 'yaiza1@gmail.com',
+        account_id: 125,
+        name: 'Yaiza Pineda',
+        phone: '12345678',
+        cellphone: '123456789',
+        account_type_name: 'user',
+        account_type_id: 1,
+        carrear_name: 'Maestría en Estadística Aplicada',
+        credits: 87,
+        average: 89.9,
+        document_id: '123456789',
+        img: 'https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo='
+    }
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+app.get('/tickets', auth, (req, res) => {
+    let data = [
+        {
+            "no": "12181714",
+            "creation_date": "26/06/2021",
+            "last_date": "02/09/2021",
+            "year": "2020",
+            "service": "Asignación de cursos",
+            "period": "Tercer Trimestre",
+            "bank": "Banrural",
+            "document": "1234455667",
+            "payment_date": "26-08-2020",
+            "amount": 1100,
+            "state": 0,
+            "remaining_days": 0
+        },
+        {
+            "no": "12181714",
+            "creation_date": "26/06/2021",
+            "last_date": "02/09/2021",
+            "year": "2020",
+            "service": "Asignación de cursos",
+            "period": "Tercer Trimestre",
+            "bank": "Banrural",
+            "document": "1234455667",
+            "payment_date": "26-08-2020",
+            "amount": 100,
+            "state": 0,
+            "remaining_days": 2
+        },
+        {
+            "no": "12181713",
+            "creation_date": "26/06/2020",
+            "last_date": "02/09/2020",
+            "year": "2020",
+            "service": "Asignación de cursos",
+            "period": "Tercer Trimestre",
+            "bank": "G&T",
+            "document": "1234455667",
+            "payment_date": "26-08-2020",
+            "amount": "300",
+            "state": 1,
+            "remaining_days": 7
+        },
+        {
+            "no": "12181712",
+            "creation_date": "26/06/2020",
+            "last_date": "02/09/2020",
+            "year": "2020",
+            "service": "Asignación de cursos",
+            "period": "Tercer Trimestre",
+            "bank": "Credomatic",
+            "document": "1234455667",
+            "payment_date": "26-08-2020",
+            "amount": "500",
+            "state": 2,
+            "remaining_days": 0
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data: data
+    })
+})
+let status = 'assigment'
+const toogleData = (nu) => {
+    if (nu == 1) {
+        status = 'maintenance'
+    } else if (nu == 2) {
+        status = 'assigment'
+    }
+}
+app.get('/assigmentstatus', auth, (req, res) => {
+    return res.status(200).json({
+        success: true,
+        data: status
+    })
+})
+app.get('/assigmentinfo', auth, (req, res) => {
+    let data = {
+        "period": "Primer Trimestre",
+        "year": "2021",
+        "start_date": "2021-01-01",
+        "finish_date": "2021-01-31",
+        "remaining_days": 10,
+        "courses": [
+            {
+                "id": 0,
+                "code": "COF01",
+                "name": "Finanzas Industriales Corporativas",
+                "section": {
+                    "id": 0,
+                    "section": "A",
+                    "teaching": "Manuel del toro",
+                    "teaching_profile_image": "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/10/14/15710517464954.jpg",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        true,
+                        false,
+                        true,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T3",
+                    "room": "303",
+                    "state": "Aprobado"
+                }
+            },
+            {
+                "id": 1,
+                "code": "GIM01",
+                "name": "Logistica",
+                "section": {
+                    "id": 0,
+                    "section": "A",
+                    "teaching": "Ramon del toro",
+                    "teaching_profile_image": "https://www.magisnet.com/wp-content/uploads/2020/11/Nivel-de-Ingles.jpg",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T4",
+                    "room": "305"
+                }
+            },
+            {
+                "id": 2,
+                "code": "GIM01",
+                "name": "Logistica",
+                "section": {
+                    "id": 0,
+                    "section": "A",
+                    "teaching": "Ramon del toro",
+                    "teaching_profile_image": "https://phantom-marca.unidadeditorial.es/7294c3285fbf5a5b15ae95bba788fad2/resize/1320/f/jpg/assets/multimedia/imagenes/2021/09/13/16315257504382.jpg",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T4",
+                    "room": "305"
+                }
+            },
+            {
+                "id": 3,
+                "code": "GIM01",
+                "name": "Logistica",
+                "section": {
+                    "id": 0,
+                    "section": "A",
+                    "teaching": "Ramon del toro",
+                    "teaching_profile_image": "https://www.elegircarrera.net/blog/wp-content/uploads/2019/01/profesor-emerito-2000x1200.jpg",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T4",
+                    "room": "305"
+                }
+            }
+        ]
+    }
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+app.post('/assigmentcourses', auth, (req, res) => {
+    console.log(req.body)
+    toogleData(1)
+    return res.status(200).json({
+        success: true,
+
+    })
+})
+app.get('/assigmentcourses', auth, (req, res) => {
+    const data = [
+        {
+            "id": 0,
+            "code": "COF01",
+            "name": "Finanzas Industriales Corporativas",
+            "section": [
+                {
+                    "id": 0,
+                    "section": "A",
+                    "teaching": "Manuel del toro",
+                    "start_time": "Hora Inicio 07:00",
+                    "finish_time": "Hora Fin 10:00",
+                    "days": [
+                        true,
+                        false,
+                        true,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "Edificio T3",
+                    "room": "Salon 303"
+                },
+                {
+                    "id": 1,
+                    "section": "A+",
+                    "teaching": "Manuel del toro",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        true,
+                        true,
+                        true,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "Edificio II",
+                    "room": "Salon 500"
+                },
+                {
+                    "id": 2,
+                    "section": "B",
+                    "teaching": "Manuel del toro",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T3",
+                    "room": "303"
+                },
+                {
+                    "id": 3,
+                    "section": "C",
+                    "teaching": "Manuel del toro",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T3",
+                    "room": "303"
+                },
+                {
+                    "id": 4,
+                    "section": "C",
+                    "teaching": "Manuel Ronaldo Marcos Primero",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T3",
+                    "room": "303"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "code": "GIM01",
+            "name": "Logistica",
+            "section": [
+                {
+                    "id": 0,
+                    "section": "A",
+                    "teaching": "Ramon del toro",
+                    "start_time": "07:00",
+                    "finish_time": "10:00",
+                    "days": [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        true,
+                        false
+                    ],
+                    "building": "T4",
+                    "room": "305"
+                }
+            ]
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
 app.get('/userinfo', auth, (req, res) => {
-    
+    let data = {
+        email: 'yaiza2@gmail.com',
+        account_id: 125,
+        name: 'Yaiza Pineda',
+        phone: '12345678',
+        cellphone: '123456789',
+        account_type_name: 'user',
+        account_type_id: 1,
+        carrear_name: 'Maestría en Estadística Aplicada',
+        credits: 87,
+        average: 89.9,
+        document_id: '123456789',
+        student_card: '987654321',
+        img: 'https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo='
+    }
+    return res.status(200).json({
+        success: true,
+        data
+    })
 })
 
+app.get('/historyassigmentcourses', auth, (req, res) => {
+    let data = [
+        {
+            "id": 0,
+            "code": "COF01",
+            "name": "Finanzas Industriales Corporativas",
+            "section": {
+                "id": 0,
+                "section": "A",
+                "teaching": "Manuel del toro",
+                "teaching_profile_image": "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/10/14/15710517464954.jpg",
+                "start_time": "07:00",
+                "finish_time": "10:00",
+                "days": [
+                    true,
+                    false,
+                    true,
+                    false,
+                    false,
+                    true,
+                    false
+                ],
+                "building": "T3",
+                "room": "303",
+                "state": "Aprobado"
+            }
+        },
+        {
+            "id": 1,
+            "code": "GIM01",
+            "name": "Logistica",
+            "section": {
+                "id": 0,
+                "section": "A",
+                "teaching": "Ramon del toro",
+                "teaching_profile_image": "https://www.magisnet.com/wp-content/uploads/2020/11/Nivel-de-Ingles.jpg",
+                "start_time": "07:00",
+                "finish_time": "10:00",
+                "days": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false
+                ],
+                "building": "T4",
+                "room": "305"
+            }
+        },
+        {
+            "id": 2,
+            "code": "GIM01",
+            "name": "Logistica",
+            "section": {
+                "id": 0,
+                "section": "A",
+                "teaching": "Ramon del toro",
+                "teaching_profile_image": "https://phantom-marca.unidadeditorial.es/7294c3285fbf5a5b15ae95bba788fad2/resize/1320/f/jpg/assets/multimedia/imagenes/2021/09/13/16315257504382.jpg",
+                "start_time": "07:00",
+                "finish_time": "10:00",
+                "days": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false
+                ],
+                "building": "T4",
+                "room": "305"
+            }
+        },
+        {
+            "id": 3,
+            "code": "GIM01",
+            "name": "Logistica",
+            "section": {
+                "id": 0,
+                "section": "A",
+                "teaching": "Ramon del toro",
+                "teaching_profile_image": "https://www.elegircarrera.net/blog/wp-content/uploads/2019/01/profesor-emerito-2000x1200.jpg",
+                "start_time": "07:00",
+                "finish_time": "10:00",
+                "days": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false
+                ],
+                "building": "T4",
+                "room": "305"
+            }
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
 
 
 app.listen(process.env.API_PORT, () => {
