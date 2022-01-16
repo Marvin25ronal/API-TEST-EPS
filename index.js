@@ -62,6 +62,11 @@ app.post('/login', (req, res) => {
                 expiresIn: "2h",
             }
         )
+        // let data = {
+        //     user_id: 1,
+        //     email: 'marvin1ronal@gmail.com'
+        // }
+        console.log(token)
         return res.status(200).json({
             success: true,
             data: token
@@ -82,14 +87,13 @@ app.get('/optionslogin', auth, (req, res) => {
                 "text": "Aspirante",
                 "icon": "user-check",
                 "icon_class": "FontAwesome5",
-                'target': 'Candidate'
+
             },
             {
                 "id": 1,
                 "text": "Usuario",
                 "icon": "user",
                 "icon_class": "FontAwesome5",
-                'target': 'NormalUser'
             }
         ],
         carrear_type: [
@@ -125,6 +129,7 @@ app.get('/optionslogin', auth, (req, res) => {
             }
         ]
     }
+
     res.json({
         success: true,
         data: data
@@ -145,7 +150,7 @@ app.get('/workschedule', (req, res) => {
         data: data
     })
 })
-app.get('/months/:id', (req, res) => {
+app.get('/months/:id/:year', (req, res) => {
     res.status(200).json({
         success: false,
         data: datamonths
@@ -229,7 +234,7 @@ app.get('/Document/:doc', (req, res) => {
     let document = req.params.doc
     if (document == '123456789') {
         let data = {
-            DPI: '1234456789',
+            document: '1234456789',
             first_name: 'Yaiza',
             second_name: 'Estefania',
             first_last_name: 'Pineda',
@@ -257,7 +262,6 @@ app.get('/campus', (req, res) => {
             "text": "Sede Central",
             "icon": "camera",
             "icon_color": "#091353",
-            "card_color": "#99FEFF",
             "text_color": "black",
             "icon_class": "EvilIcons"
         },
@@ -473,24 +477,33 @@ app.post('/register', (req, res) => {
 
 })
 
-app.get('/logininfo/:id1/:id2', auth, (req, res) => {
+app.post('/logininfo', auth, (req, res) => {
     let data = {
         email: 'yaiza1@gmail.com',
         account_id: 125,
         name: 'Yaiza Pineda',
-        phone: '12345678',
-        cellphone: '123456789',
         account_type_name: 'user',
         account_type_id: 1,
         carrear_name: 'Maestría en Estadística Aplicada',
-        credits: 87,
-        average: 89.9,
-        document_id: '123456789',
-        img: 'https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo='
     }
+    const token = jwt.sign(
+        {
+            user_id: 1,
+            email: 'marvin1ronal@gmail.com',
+            account_id: 125,
+            account_type_name: 'user'
+        },
+        process.env.TOKEN_KEY,
+        {
+            expiresIn: "2h",
+        }
+    )
     return res.status(200).json({
         success: true,
-        data
+        data: {
+            information: data,
+            token: token
+        }
     })
 })
 app.get('/tickets', auth, (req, res) => {
@@ -949,7 +962,389 @@ app.get('/historyassigmentcourses', auth, (req, res) => {
     })
 })
 
+app.get('/datahistorycourse', auth, (req, res) => {
+    let data = []
+    for (let i = 0; i < 12; i++) {
+        let note = faker.datatype.number(100)
+        let d = {
+            "id": i,
+            "code": `000${i}`,
+            "credits": faker.datatype.number(5),
+            "name": faker.vehicle.vehicle(),
+            "approval_date": faker.date.past().toISOString().split('T')[0],
+            "note": note,
+            "teaching": faker.name.findName(),
+            "teaching_profile_image": faker.random.image(),
+            "state": note < 50 ? 'Rechazado' : (i % 3 == 0 ? 'Aprobado' : 'Pendiente')
+        }
+        data.push(d)
+    }
 
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+
+app.get('/questions', (req, res) => {
+    let data = [
+        {
+            "type": "Inscripciones",
+            "questions": [
+                {
+                    "title": "¿Quiénes son considerados estudiantes de primer ingreso?",
+                    "answer": "Son aquellas personas que por primera vez ingresan a la Universidad. Artículo 10º. Del Reglamento de Administración Estudiantil."
+                },
+                {
+                    "title": "¿Qué es la inscripción?",
+                    "answer": "De acuerdo al artículo 14 del Reglamento de Administración Estudiantil, consiste en la admisión legal del solicitante al haber cumplido con los requisitos de ley. Este proceso se realiza en el Departamento de Registro y Estadística con todos los requisitos establecidos. En el caso de los Centros Universitarios, Escuelas de Enfermería e Institutos Tecnológicos el Departamento de Registro y Estadística recibe y revisa los expedientes junto con boleta bancaria y tarjeta CIDPI, verificando que cuenten con los documentos necesarios para ser inscritos. Sí procede, realiza inscripción y devuelve las boletas bancarias selladas y firmadas. Sí no procede informa a la unidad académica sobre la situación particular de cada expediente."
+                }
+            ]
+        },
+        {
+            "type": "Requisitos",
+            "questions": [
+                {
+                    "title": "¿Cuáles son los requisitos de inscripción?",
+                    "answer": "Una fotografía tamaño cédula Tarjeta de Orientación Vocacional Constancia original de pruebas de conocimientos básicos y específicos. Solicitud de ingreso impresa (debe llenarla el interesado vía internet) Fotostática del título en 5”x 7 “ de estudio fotográfico. Cierre de pensum con firmas y sellos en original (sólo para estudiantes de reciente graduación). Certificación general de estudios con firmas y sellos en original Certificación de la partida de nacimiento extendida por RENAP."
+                },
+                {
+                    "title": "¿Quiénes están exonerados de las pruebas de conocimientos básicos y específicos?",
+                    "answer": "-Los profesionales graduados en cualquier universidad de Guatemala, que cuenten como mínimo con el grado académico de licenciatura."
+                }
+            ]
+        },
+        {
+            "type": "Solicitudes",
+            "questions": [
+                {
+                    "title": "¿Qué es la solicitud de ingreso?",
+                    "answer": "Es el procedimiento mediante el cual el aspirante selecciona la carrera que desea estudiar, llenando los datos solicitados en la página www.registro.usac.edu.gt opción primer ingreso, Solicitud de Ingreso, la cual le asigna la fecha y lugar de preinscripción."
+                },
+                {
+                    "title": "¿Qué sucede si un aspirante escoge una carrera diferente a la que desea?",
+                    "answer": "Tacha con una línea lo impreso, escribe lo correcto a lapicero y lo firma, siempre y cuando la carrera sea impartida para primer ingreso."
+                }
+            ]
+        },
+        {
+            "type": "Inscripciones",
+            "questions": [
+                {
+                    "title": "¿Quiénes son considerados estudiantes de primer ingreso?",
+                    "answer": "Son aquellas personas que por primera vez ingresan a la Universidad. Artículo 10º. Del Reglamento de Administración Estudiantil."
+                },
+                {
+                    "title": "¿Qué es la inscripción?",
+                    "answer": "De acuerdo al artículo 14 del Reglamento de Administración Estudiantil, consiste en la admisión legal del solicitante al haber cumplido con los requisitos de ley. Este proceso se realiza en el Departamento de Registro y Estadística con todos los requisitos establecidos. En el caso de los Centros Universitarios, Escuelas de Enfermería e Institutos Tecnológicos el Departamento de Registro y Estadística recibe y revisa los expedientes junto con boleta bancaria y tarjeta CIDPI, verificando que cuenten con los documentos necesarios para ser inscritos. Sí procede, realiza inscripción y devuelve las boletas bancarias selladas y firmadas. Sí no procede informa a la unidad académica sobre la situación particular de cada expediente."
+                }
+            ]
+        },
+        {
+            "type": "Requisitos",
+            "questions": [
+                {
+                    "title": "¿Cuáles son los requisitos de inscripción?",
+                    "answer": "Una fotografía tamaño cédula Tarjeta de Orientación Vocacional Constancia original de pruebas de conocimientos básicos y específicos. Solicitud de ingreso impresa (debe llenarla el interesado vía internet) Fotostática del título en 5”x 7 “ de estudio fotográfico. Cierre de pensum con firmas y sellos en original (sólo para estudiantes de reciente graduación). Certificación general de estudios con firmas y sellos en original Certificación de la partida de nacimiento extendida por RENAP."
+                },
+                {
+                    "title": "¿Quiénes están exonerados de las pruebas de conocimientos básicos y específicos?",
+                    "answer": "-Los profesionales graduados en cualquier universidad de Guatemala, que cuenten como mínimo con el grado académico de licenciatura."
+                }
+            ]
+        },
+        {
+            "type": "Solicitudes",
+            "questions": [
+                {
+                    "title": "¿Qué es la solicitud de ingreso?",
+                    "answer": "Es el procedimiento mediante el cual el aspirante selecciona la carrera que desea estudiar, llenando los datos solicitados en la página www.registro.usac.edu.gt opción primer ingreso, Solicitud de Ingreso, la cual le asigna la fecha y lugar de preinscripción."
+                },
+                {
+                    "title": "¿Qué sucede si un aspirante escoge una carrera diferente a la que desea?",
+                    "answer": "Tacha con una línea lo impreso, escribe lo correcto a lapicero y lo firma, siempre y cuando la carrera sea impartida para primer ingreso."
+                }
+            ]
+        },
+        {
+            "type": "Inscripciones",
+            "questions": [
+                {
+                    "title": "¿Quiénes son considerados estudiantes de primer ingreso?",
+                    "answer": "Son aquellas personas que por primera vez ingresan a la Universidad. Artículo 10º. Del Reglamento de Administración Estudiantil."
+                },
+                {
+                    "title": "¿Qué es la inscripción?",
+                    "answer": "De acuerdo al artículo 14 del Reglamento de Administración Estudiantil, consiste en la admisión legal del solicitante al haber cumplido con los requisitos de ley. Este proceso se realiza en el Departamento de Registro y Estadística con todos los requisitos establecidos. En el caso de los Centros Universitarios, Escuelas de Enfermería e Institutos Tecnológicos el Departamento de Registro y Estadística recibe y revisa los expedientes junto con boleta bancaria y tarjeta CIDPI, verificando que cuenten con los documentos necesarios para ser inscritos. Sí procede, realiza inscripción y devuelve las boletas bancarias selladas y firmadas. Sí no procede informa a la unidad académica sobre la situación particular de cada expediente."
+                }
+            ]
+        },
+        {
+            "type": "Requisitos",
+            "questions": [
+                {
+                    "title": "¿Cuáles son los requisitos de inscripción?",
+                    "answer": "Una fotografía tamaño cédula Tarjeta de Orientación Vocacional Constancia original de pruebas de conocimientos básicos y específicos. Solicitud de ingreso impresa (debe llenarla el interesado vía internet) Fotostática del título en 5”x 7 “ de estudio fotográfico. Cierre de pensum con firmas y sellos en original (sólo para estudiantes de reciente graduación). Certificación general de estudios con firmas y sellos en original Certificación de la partida de nacimiento extendida por RENAP."
+                },
+                {
+                    "title": "¿Quiénes están exonerados de las pruebas de conocimientos básicos y específicos?",
+                    "answer": "-Los profesionales graduados en cualquier universidad de Guatemala, que cuenten como mínimo con el grado académico de licenciatura."
+                }
+            ]
+        },
+        {
+            "type": "Solicitudes",
+            "questions": [
+                {
+                    "title": "¿Qué es la solicitud de ingreso?",
+                    "answer": "Es el procedimiento mediante el cual el aspirante selecciona la carrera que desea estudiar, llenando los datos solicitados en la página www.registro.usac.edu.gt opción primer ingreso, Solicitud de Ingreso, la cual le asigna la fecha y lugar de preinscripción."
+                },
+                {
+                    "title": "¿Qué sucede si un aspirante escoge una carrera diferente a la que desea?",
+                    "answer": "Tacha con una línea lo impreso, escribe lo correcto a lapicero y lo firma, siempre y cuando la carrera sea impartida para primer ingreso."
+                }
+            ]
+        },
+        {
+            "type": "Inscripciones",
+            "questions": [
+                {
+                    "title": "¿Quiénes son considerados estudiantes de primer ingreso?",
+                    "answer": "Son aquellas personas que por primera vez ingresan a la Universidad. Artículo 10º. Del Reglamento de Administración Estudiantil."
+                },
+                {
+                    "title": "¿Qué es la inscripción?",
+                    "answer": "De acuerdo al artículo 14 del Reglamento de Administración Estudiantil, consiste en la admisión legal del solicitante al haber cumplido con los requisitos de ley. Este proceso se realiza en el Departamento de Registro y Estadística con todos los requisitos establecidos. En el caso de los Centros Universitarios, Escuelas de Enfermería e Institutos Tecnológicos el Departamento de Registro y Estadística recibe y revisa los expedientes junto con boleta bancaria y tarjeta CIDPI, verificando que cuenten con los documentos necesarios para ser inscritos. Sí procede, realiza inscripción y devuelve las boletas bancarias selladas y firmadas. Sí no procede informa a la unidad académica sobre la situación particular de cada expediente."
+                }
+            ]
+        },
+        {
+            "type": "Requisitos",
+            "questions": [
+                {
+                    "title": "¿Cuáles son los requisitos de inscripción?",
+                    "answer": "Una fotografía tamaño cédula Tarjeta de Orientación Vocacional Constancia original de pruebas de conocimientos básicos y específicos. Solicitud de ingreso impresa (debe llenarla el interesado vía internet) Fotostática del título en 5”x 7 “ de estudio fotográfico. Cierre de pensum con firmas y sellos en original (sólo para estudiantes de reciente graduación). Certificación general de estudios con firmas y sellos en original Certificación de la partida de nacimiento extendida por RENAP."
+                },
+                {
+                    "title": "¿Quiénes están exonerados de las pruebas de conocimientos básicos y específicos?",
+                    "answer": "-Los profesionales graduados en cualquier universidad de Guatemala, que cuenten como mínimo con el grado académico de licenciatura."
+                }
+            ]
+        },
+        {
+            "type": "Solicitudes",
+            "questions": [
+                {
+                    "title": "¿Qué es la solicitud de ingreso?",
+                    "answer": "Es el procedimiento mediante el cual el aspirante selecciona la carrera que desea estudiar, llenando los datos solicitados en la página www.registro.usac.edu.gt opción primer ingreso, Solicitud de Ingreso, la cual le asigna la fecha y lugar de preinscripción."
+                },
+                {
+                    "title": "¿Qué sucede si un aspirante escoge una carrera diferente a la que desea?",
+                    "answer": "Tacha con una línea lo impreso, escribe lo correcto a lapicero y lo firma, siempre y cuando la carrera sea impartida para primer ingreso."
+                }
+            ]
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+
+app.get('/normatives', (req, res) => {
+    let data = [
+        {
+            name: 'Normativo de la Escuela de Estudios de Postgrado',
+            description: 'Acta No. 4 - 2014',
+            uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2021/06/normativo-de-Escuela-de-Postgrado-aprobado-por-Junta.pdf'
+        },
+        {
+            name: 'Normativo de la Escuela de Estudios de Postgrado',
+            description: 'Acta No. 4 - 2014',
+            uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2021/06/normativo-aprobado-por-Junta-trabajos-de-tesis.pdf'
+        },
+        {
+            name: 'Normativo de la Escuela de Estudios de Postgrado',
+            description: 'Acta No. 4 - 2014',
+            uri: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+        }
+
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+
+app.get('/categorydocuments', (req, res) => {
+    let data = [
+        {
+            "id": 0,
+            "text": "Programas de Maestría 2021",
+            "icon": "inbox",
+            "icon_color": "black",
+            "text_color": "black",
+            "icon_class": "AntDesign"
+        },
+        {
+            "id": 1,
+            "text": "Programas de Maestría 2022",
+            "icon": "inbox",
+            "icon_color": "black",
+            "text_color": "black",
+            "icon_class": "AntDesign"
+        },
+        {
+            id: 2,
+            text: 'Programas de Especialización',
+            "icon": "windows",
+            "icon_color": "black",
+            "text_color": "black",
+            "icon_class": "AntDesign"
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+app.get('/documents/:category_id', (req, res) => {
+    let data = [
+        {
+            "id": 0,
+            "text": "Maestría en Gestión Industrial",
+            "icon": "paperclip",
+            "icon_color": "#091353",
+            "text_color": "black",
+            "icon_class": "AntDesign",
+            'type': 'tab'
+        },
+        {
+            "id": 1,
+            "text": "Ingeniería para el Desarrollo Municipal",
+            "icon": "paperclip",
+            "icon_color": "#091353",
+            "text_color": "black",
+            "icon_class": "AntDesign",
+            'type': 'tab'
+        },
+        {
+            id: 2,
+            text: 'Energía y Ambiente',
+            "icon": "paperclip",
+            "icon_color": "#091353",
+            "text_color": "black",
+            "icon_class": "AntDesign",
+            type: 'tab'
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+
+app.get('/documents/tab/:id', (req, res) => {
+    let data = [
+        {
+            name: 'Primer trimestre',
+            documents: [
+                {
+                    "id": 0,
+                    "text": "Finanzas industriales corporativa",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/COF01.pdf'
+                },
+                {
+                    "id": 1,
+                    "text": "Logística",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/GIM01.pdf'
+                }
+            ]
+        },
+        {
+            name: 'Segundo trimestre',
+            documents: [
+                {
+                    "id": 0,
+                    "text": "Seminario I: Metodología de la investigacióna",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/COF01.pdf'
+                },
+                {
+                    "id": 1,
+                    "text": "Desarrollo Humano en la Industria",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/GIM01.pdf'
+                }
+            ]
+        },
+        {
+            name: 'Tercer trimestre',
+            documents: [
+                {
+                    "id": 0,
+                    "text": "Seminario I: Metodología de la investigacióna",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/COF01.pdf'
+                },
+                {
+                    "id": 1,
+                    "text": "Desarrollo Humano en la Industria",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/GIM01.pdf'
+                }
+            ]
+        },
+        {
+            name: 'Cuarto trimestre',
+            documents: [
+                {
+                    "id": 0,
+                    "text": "Seminario I: Metodología de la investigacióna",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/COF01.pdf'
+                },
+                {
+                    "id": 1,
+                    "text": "Desarrollo Humano en la Industria",
+                    "icon": "inbox",
+                    "icon_color": "#091353",
+                    "text_color": "black",
+                    "icon_class": "AntDesign",
+                    uri: 'https://postgrado.ingenieria.usac.edu.gt/wp-content/uploads/2019/06/GIM01.pdf'
+                }
+            ]
+        }
+
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
 app.listen(process.env.API_PORT, () => {
     console.log('App running on port: 3000')
 })
