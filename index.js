@@ -230,7 +230,7 @@ app.get('/calendar/:id/:year/:month', (req, res) => {
     })
 
 })
-app.get('/Document/:doc', (req, res) => {
+app.get('/ccccc/:doc', (req, res) => {
     let document = req.params.doc
     if (document == '123456789') {
         let data = {
@@ -1244,6 +1244,16 @@ app.get('/documents/:category_id', (req, res) => {
     })
 })
 
+app.post('/recoverpassword', (req, res) => {
+    if(req.body.user_id=='1'){
+        return res.status(200).json({
+            success: true
+        })
+    }
+    return res.status(200).json({
+        success: false
+    })
+})
 app.get('/documents/tab/:id', (req, res) => {
     let data = [
         {
