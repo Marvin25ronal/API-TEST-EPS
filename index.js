@@ -1245,7 +1245,7 @@ app.get('/documents/:category_id', (req, res) => {
 })
 
 app.post('/recoverpassword', (req, res) => {
-    if(req.body.user_id=='1'){
+    if (req.body.user_id == '1') {
         return res.status(200).json({
             success: true
         })
@@ -1355,7 +1355,7 @@ app.get('/documents/tab/:id', (req, res) => {
         data
     })
 })
-app.listen(process.env.API_PORT, () => {
+app.listen(process.env.API_PORT || 3000, () => {
     console.log('App running on port: 3000')
 })
 
