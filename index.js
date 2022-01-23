@@ -230,7 +230,7 @@ app.get('/calendar/:id/:year/:month', (req, res) => {
     })
 
 })
-app.get('/ccccc/:doc', (req, res) => {
+app.get('/Document/:doc', (req, res) => {
     let document = req.params.doc
     if (document == '123456789') {
         let data = {
