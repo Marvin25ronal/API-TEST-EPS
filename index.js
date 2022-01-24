@@ -1355,9 +1355,23 @@ app.get('/documents/tab/:id', (req, res) => {
         data
     })
 })
+app.post('/changemaintenance', (req, res) => {
+    status = 'maintenance'
+    return res.status(200).json({
+        success: true,
+    })
+})
+
+app.post('/changeassigment', (req, res) => {
+    status='assigment'
+    return res.status(200).json({
+        success: true,
+    })
+})
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log('App running on port: ',PORT)
+    console.log('App running on port: ', PORT)
 })
 
 
