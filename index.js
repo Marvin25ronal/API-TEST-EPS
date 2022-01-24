@@ -250,6 +250,7 @@ app.get('/workschedule', (req, res) => {
         { id: '3', title: 'Especializaciones', description: 'Sábados' },
         { id: '4', title: 'Gestión del Talento Humano', description: 'Sábados' },
         { id: '5', title: 'Educación Virtual para en Nivel Superior', description: 'Sábados' },
+        { id: '6', title: 'Educación Virtual para en Nivel Superior', description: 'Sábados' },
     ]
     res.status(200).json({
         success: false,
