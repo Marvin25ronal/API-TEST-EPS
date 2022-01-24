@@ -48,113 +48,6 @@ const datamonths = [
     { id: '11', title: 'Noviembre' },
     { id: '12', title: 'Diciembre' },
 ]
-let cursos = {
-    "period": "Primer Trimestre",
-    "year": "2021",
-    "start_date": "2021-01-01",
-    "finish_date": "2021-01-31",
-    "remaining_days": 10,
-    "courses": [
-        {
-            "id": 0,
-            "code": "COF01",
-            "name": "Finanzas Industriales Corporativas",
-            "section": {
-                "id": 0,
-                "section": "A",
-                "teaching": "Manuel del toro",
-                "teaching_profile_image": "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/10/14/15710517464954.jpg",
-                "start_time": "07:00",
-                "finish_time": "10:00",
-                "days": [
-                    true,
-                    false,
-                    true,
-                    false,
-                    false,
-                    true,
-                    false
-                ],
-                "building": "T3",
-                "room": "303",
-                "state": "Aprobado"
-            }
-        },
-        {
-            "id": 1,
-            "code": "GIM01",
-            "name": "Logistica",
-            "section": {
-                "id": 0,
-                "section": "A",
-                "teaching": "Ramon del toro",
-                "teaching_profile_image": "https://www.magisnet.com/wp-content/uploads/2020/11/Nivel-de-Ingles.jpg",
-                "start_time": "07:00",
-                "finish_time": "10:00",
-                "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
-                ],
-                "building": "T4",
-                "room": "305"
-            }
-        },
-        {
-            "id": 2,
-            "code": "GIM01",
-            "name": "Logistica",
-            "section": {
-                "id": 0,
-                "section": "A",
-                "teaching": "Ramon del toro",
-                "teaching_profile_image": "https://phantom-marca.unidadeditorial.es/7294c3285fbf5a5b15ae95bba788fad2/resize/1320/f/jpg/assets/multimedia/imagenes/2021/09/13/16315257504382.jpg",
-                "start_time": "07:00",
-                "finish_time": "10:00",
-                "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
-                ],
-                "building": "T4",
-                "room": "305"
-            }
-        },
-        {
-            "id": 3,
-            "code": "GIM01",
-            "name": "Logistica",
-            "section": {
-                "id": 0,
-                "section": "A",
-                "teaching": "Ramon del toro",
-                "teaching_profile_image": "https://www.elegircarrera.net/blog/wp-content/uploads/2019/01/profesor-emerito-2000x1200.jpg",
-                "start_time": "07:00",
-                "finish_time": "10:00",
-                "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
-                ],
-                "building": "T4",
-                "room": "305"
-            }
-        }
-    ]
-}
-
 
 app.post('/login', (req, res) => {
     let data = req.body
@@ -692,17 +585,7 @@ app.get('/assigmentstatus', auth, (req, res) => {
     })
 })
 app.get('/assigmentinfo', auth, (req, res) => {
-
-
-    return res.status(200).json({
-        success: true,
-        cursos
-    })
-})
-app.post('/assigmentcourses', auth, (req, res) => {
-    console.log(req.body)
-    toogleData(1)
-    cursos = {
+    let data = {
         "period": "Primer Trimestre",
         "year": "2021",
         "start_date": "2021-01-01",
@@ -808,6 +691,14 @@ app.post('/assigmentcourses', auth, (req, res) => {
             }
         ]
     }
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+app.post('/assigmentcourses', auth, (req, res) => {
+    console.log(req.body)
+    toogleData(1)
     return res.status(200).json({
         success: true,
 
@@ -1472,8 +1363,7 @@ app.post('/changemaintenance', (req, res) => {
 })
 
 app.post('/changeassigment', (req, res) => {
-    status = 'assigment'
-    cursos = {}
+    status='assigment'
     return res.status(200).json({
         success: true,
     })
