@@ -694,7 +694,7 @@ app.get('/assigmentinfo', auth, (req, res) => {
 
     return res.status(200).json({
         success: true,
-        cursos
+        data: cursos
     })
 })
 app.post('/assigmentcourses', auth, (req, res) => {
