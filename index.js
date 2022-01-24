@@ -699,7 +699,7 @@ app.get('/assigmentinfo', auth, (req, res) => {
 })
 app.post('/assigmentcourses', auth, (req, res) => {
     console.log(req.body)
-    toogleData(1)
+    toogleData(2)
     cursos = {
         "period": "Primer Trimestre",
         "year": "2021",
