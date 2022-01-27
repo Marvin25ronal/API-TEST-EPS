@@ -589,7 +589,7 @@ app.post('/logininfo', auth, (req, res) => {
         email: 'yaiza1@gmail.com',
         account_id: 125,
         name: 'Yaiza Pineda',
-        account_type_name: 'candidate',
+        account_type_name: 'user',
         account_type_id: 1,
         carrear_name: 'Maestría en Estadística Aplicada',
         document_id: '123456789'
@@ -599,7 +599,7 @@ app.post('/logininfo', auth, (req, res) => {
             user_id: 1,
             email: 'marvin1ronal@gmail.com',
             account_id: 125,
-            account_type_name: 'candidate'
+            account_type_name: 'user'
         },
         process.env.TOKEN_KEY,
         {
