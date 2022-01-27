@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.movilapplication",
+            "sha256_cert_fingerprints": [
+                "46:DB:8B:B7:43:E8:01:88:9D:45:CE:F0:F2:DA:F5:D4:99:8C:79:2A:64:E6:CF:B7:FA:6A:FC:7E:3A:E3:46:78"
+            ]
+        }
+    }
+]

@@ -589,16 +589,17 @@ app.post('/logininfo', auth, (req, res) => {
         email: 'yaiza1@gmail.com',
         account_id: 125,
         name: 'Yaiza Pineda',
-        account_type_name: 'user',
+        account_type_name: 'candidate',
         account_type_id: 1,
         carrear_name: 'Maestría en Estadística Aplicada',
+        document_id: '123456789'
     }
     const token = jwt.sign(
         {
             user_id: 1,
             email: 'marvin1ronal@gmail.com',
             account_id: 125,
-            account_type_name: 'user'
+            account_type_name: 'candidate'
         },
         process.env.TOKEN_KEY,
         {
@@ -1478,7 +1479,32 @@ app.post('/changeassigment', (req, res) => {
     })
 })
 
-const PORT = process.env.PORT || 3000;
+app.get('/candidateinfo', auth, (req, res) => {
+    let data = {
+        email: 'yaiza2@gmail.com',
+        account_id: 125,
+        name: 'Yaiza Pineda',
+        phone: '12345678',
+        cellphone: '12345678',
+        account_type_name: 'candidate',
+        account_type_id: 2,
+        carrear_name: 'Maestría en Estadística Aplicada',
+        document_id: '123456789',
+        img: 'https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg'
+    }
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+const fs=require('fs')
+var assetlinks = fs.readFileSync(__dirname + '/static/assetlinks.json');
+app.get('/.well-known/assetlinks.json', function(req, res, next) {
+     res.set('Content-Type', 'application/json');
+     res.status(200).send(assetlinks);
+});
+
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
     console.log('App running on port: ', PORT)
 })
