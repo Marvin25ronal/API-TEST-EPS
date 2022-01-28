@@ -585,21 +585,36 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/logininfo', auth, (req, res) => {
-    let data = {
-        email: 'yaiza1@gmail.com',
-        account_id: 125,
-        name: 'Yaiza Pineda',
-        account_type_name: 'user',
-        account_type_id: 1,
-        carrear_name: 'Maestría en Estadística Aplicada',
-        document_id: '123456789'
+    let data={}
+    console.log(req.body)
+    if(req.body.account_id==0){
+        data = {
+            email: 'yaiza1@gmail.com',
+            account_id: 125,
+            name: 'Yaiza Pineda',
+            account_type_name: 'candidate',
+            account_type_id: 1,
+            carrear_name: 'Maestría en Estadística Aplicada',
+            document_id: '123456789'
+        }
+    }else{
+        data = {
+            email: 'yaiza1@gmail.com',
+            account_id: 125,
+            name: 'Yaiza Pineda',
+            account_type_name: 'user',
+            account_type_id: 1,
+            carrear_name: 'Maestría en Estadística Aplicada',
+            document_id: '123456789'
+        }
     }
+    
     const token = jwt.sign(
         {
             user_id: 1,
             email: 'marvin1ronal@gmail.com',
             account_id: 125,
-            account_type_name: 'user'
+            account_type_name: 'candidate'
         },
         process.env.TOKEN_KEY,
         {
@@ -1497,12 +1512,19 @@ app.get('/candidateinfo', auth, (req, res) => {
         data
     })
 })
-const fs=require('fs')
+const fs = require('fs')
 var assetlinks = fs.readFileSync(__dirname + '/static/assetlinks.json');
-app.get('/.well-known/assetlinks.json', function(req, res, next) {
-     res.set('Content-Type', 'application/json');
-     res.status(200).send(assetlinks);
+app.get('/.well-known/assetlinks.json', function (req, res, next) {
+    res.set('Content-Type', 'application/json');
+    res.status(200).send(assetlinks);
 });
+
+app.get('/registerstatus', (req, res) => {
+    return res.status(200).json({
+        success: true,
+        data: true
+    })
+})
 
 const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
