@@ -2423,7 +2423,7 @@ app.post('/createrequestticket', auth, (req, res) => {
         }
     })
 })
-let honeyalonsostatus = 'block'
+let honeyalonsostatus = 'inprogress'
 app.get('/honeyalonsostatus', auth, (req, res) => {
     return res.status(200).json({
         success: true,
