@@ -66,16 +66,17 @@ let cursos = {
                 "section": "A",
                 "teaching": "Manuel del toro",
                 "teaching_profile_image": "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/10/14/15710517464954.jpg",
-                "start_time": "07:00",
-                "finish_time": "10:00",
                 "days": [
-                    true,
-                    false,
-                    true,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "10:00 am",
+                        finish: "11:00 am"
+                    },
+                    {
+                        name:"Martes",
+                        start:"2:00 am",
+                        finish:"3:00 pm",
+                    }
                 ],
                 "building": "T3",
                 "room": "303",
@@ -94,13 +95,16 @@ let cursos = {
                 "start_time": "07:00",
                 "finish_time": "10:00",
                 "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "10:00 am",
+                        finish: "11:00 am"
+                    },
+                    {
+                        name:"Martes",
+                        start:"2:00 am",
+                        finish:"3:00 pm",
+                    }
                 ],
                 "building": "T4",
                 "room": "305"
@@ -118,13 +122,16 @@ let cursos = {
                 "start_time": "07:00",
                 "finish_time": "10:00",
                 "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "10:00 am",
+                        finish: "11:00 am"
+                    },
+                    {
+                        name:"Martes",
+                        start:"2:00 am",
+                        finish:"3:00 pm",
+                    }
                 ],
                 "building": "T4",
                 "room": "305"
@@ -140,15 +147,17 @@ let cursos = {
                 "teaching": "Ramon del toro",
                 "teaching_profile_image": "https://www.elegircarrera.net/blog/wp-content/uploads/2019/01/profesor-emerito-2000x1200.jpg",
                 "start_time": "07:00",
-                "finish_time": "10:00",
                 "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "10:00 am",
+                        finish: "11:00 am"
+                    },
+                    {
+                        name:"Martes",
+                        start:"2:00 am",
+                        finish:"3:00 pm",
+                    }
                 ],
                 "building": "T4",
                 "room": "305"
@@ -737,13 +746,11 @@ app.post('/assigmentcourses', auth, (req, res) => {
                     "start_time": "07:00",
                     "finish_time": "10:00",
                     "days": [
-                        true,
-                        false,
-                        true,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T3",
                     "room": "303",
@@ -762,13 +769,11 @@ app.post('/assigmentcourses', auth, (req, res) => {
                     "start_time": "07:00",
                     "finish_time": "10:00",
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T4",
                     "room": "305"
@@ -786,13 +791,11 @@ app.post('/assigmentcourses', auth, (req, res) => {
                     "start_time": "07:00",
                     "finish_time": "10:00",
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T4",
                     "room": "305"
@@ -810,13 +813,11 @@ app.post('/assigmentcourses', auth, (req, res) => {
                     "start_time": "07:00",
                     "finish_time": "10:00",
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T4",
                     "room": "305"
@@ -830,7 +831,7 @@ app.post('/assigmentcourses', auth, (req, res) => {
     })
 })
 app.get('/assigmentcourses', auth, (req, res) => {
-    const data = [
+    let data = [
         {
             "id": 0,
             "code": "COF01",
@@ -840,16 +841,18 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "id": 0,
                     "section": "A",
                     "teaching": "Manuel del toro",
-                    "start_time": "Hora Inicio 07:00",
-                    "finish_time": "Hora Fin 10:00",
+
                     "days": [
-                        true,
-                        false,
-                        true,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        },
+                        {
+                            name: "Martes",
+                            start: "00:00 am",
+                            finish: "12:00 pm"
+                        }
                     ],
                     "building": "Edificio T3",
                     "room": "Salon 303"
@@ -858,16 +861,18 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "id": 1,
                     "section": "A+",
                     "teaching": "Manuel del toro",
-                    "start_time": "07:00",
-                    "finish_time": "10:00",
+
                     "days": [
-                        true,
-                        true,
-                        true,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        },
+                        {
+                            name: "Martes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "Edificio II",
                     "room": "Salon 500"
@@ -876,16 +881,18 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "id": 2,
                     "section": "B",
                     "teaching": "Manuel del toro",
-                    "start_time": "07:00",
-                    "finish_time": "10:00",
+
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        },
+                        {
+                            name: "Jueves",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T3",
                     "room": "303"
@@ -894,16 +901,18 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "id": 3,
                     "section": "C",
                     "teaching": "Manuel del toro",
-                    "start_time": "07:00",
-                    "finish_time": "10:00",
+
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        },
+                        {
+                            name: "Sabado",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T3",
                     "room": "303"
@@ -912,16 +921,13 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "id": 4,
                     "section": "C",
                     "teaching": "Manuel Ronaldo Marcos Primero",
-                    "start_time": "07:00",
-                    "finish_time": "10:00",
+
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T3",
                     "room": "303"
@@ -937,16 +943,13 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "id": 0,
                     "section": "A",
                     "teaching": "Ramon del toro",
-                    "start_time": "07:00",
-                    "finish_time": "10:00",
+
                     "days": [
-                        false,
-                        false,
-                        false,
-                        false,
-                        false,
-                        true,
-                        false
+                        {
+                            name: "Lunes",
+                            start: "00:00 am",
+                            finish: '00:00 pm'
+                        }
                     ],
                     "building": "T4",
                     "room": "305"
@@ -954,9 +957,10 @@ app.get('/assigmentcourses', auth, (req, res) => {
             ]
         }
     ]
+
     return res.status(200).json({
         success: true,
-        data
+        data: data
     })
 })
 app.get('/userinfo', auth, (req, res) => {
@@ -965,7 +969,7 @@ app.get('/userinfo', auth, (req, res) => {
         account_id: 125,
         name: 'Yaiza Pineda',
         phone: '12345678',
-        cellphone: '123456789',
+        cellphone: '87654321',
         account_type_name: 'user',
         account_type_id: 1,
         career_name: 'Maestría en Estadística Aplicada',
@@ -995,13 +999,11 @@ app.get('/historyassigmentcourses', auth, (req, res) => {
                 "start_time": "07:00",
                 "finish_time": "10:00",
                 "days": [
-                    true,
-                    false,
-                    true,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "00:00 am",
+                        finish: '00:00 pm'
+                    }
                 ],
                 "building": "T3",
                 "room": "303",
@@ -1020,13 +1022,11 @@ app.get('/historyassigmentcourses', auth, (req, res) => {
                 "start_time": "07:00",
                 "finish_time": "10:00",
                 "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "00:00 am",
+                        finish: '00:00 pm'
+                    }
                 ],
                 "building": "T4",
                 "room": "305"
@@ -1044,13 +1044,11 @@ app.get('/historyassigmentcourses', auth, (req, res) => {
                 "start_time": "07:00",
                 "finish_time": "10:00",
                 "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "00:00 am",
+                        finish: '00:00 pm'
+                    }
                 ],
                 "building": "T4",
                 "room": "305"
@@ -1068,13 +1066,11 @@ app.get('/historyassigmentcourses', auth, (req, res) => {
                 "start_time": "07:00",
                 "finish_time": "10:00",
                 "days": [
-                    false,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    false
+                    {
+                        name: "Lunes",
+                        start: "00:00 am",
+                        finish: '00:00 pm'
+                    }
                 ],
                 "building": "T4",
                 "room": "305"
@@ -2284,44 +2280,44 @@ app.get('/workinformation', auth, (req, res) => {
     let date = new Date(6 * 3600 * 1000);
     let finish = new Date(12 * 3200 * 1000);
     let data = {
-        comment: 'es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum,',
-        isworking: 1,
-        isusacworker: 1,
-        companyname: 'Papelitos',
-        job: 'Papelero',
-        chief: 'Luis perez',
-        functions: 'Trabajador',
-        workprogram: 1,
-        workfaculty: 3,
-        workcampus: 1,
-        workerid: '1234',
-        workdays: [
-            {
-                day: 'Lunes',
-                start: date,
-                finish
-            },
-            {
-                day: 'Martes',
-                start: date,
-                finish
-            },
-            {
-                day: 'Miércoles',
-                start: date,
-                finish
-            },
-            {
-                day: 'Jueves',
-                start: date,
-                finish
-            },
-            {
-                day: 'Viernes',
-                start: date,
-                finish
-            },
-        ]
+        // comment: 'es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum,',
+        // isworking: 1,
+        // isusacworker: 1,
+        // companyname: 'Papelitos',
+        // job: 'Papelero',
+        // chief: 'Luis perez',
+        // functions: 'Trabajador',
+        // workprogram: 1,
+        // workfaculty: 3,
+        // workcampus: 1,
+        // workerid: '1234',
+        // workdays: [
+        //     {
+        //         day: 'Lunes',
+        //         start: date,
+        //         finish
+        //     },
+        //     {
+        //         day: 'Martes',
+        //         start: date,
+        //         finish
+        //     },
+        //     {
+        //         day: 'Miércoles',
+        //         start: date,
+        //         finish
+        //     },
+        //     {
+        //         day: 'Jueves',
+        //         start: date,
+        //         finish
+        //     },
+        //     {
+        //         day: 'Viernes',
+        //         start: date,
+        //         finish
+        //     },
+        // ]
     }
     return res.status(200).json({
         success: true,
@@ -2427,14 +2423,26 @@ app.post('/createrequestticket', auth, (req, res) => {
         }
     })
 })
-
+let honeyalonsostatus = 'block'
 app.get('/honeyalonsostatus', auth, (req, res) => {
     return res.status(200).json({
         success: true,
         data: {
-            status: 'finished'  ///block inprogress finished
+            status: honeyalonsostatus  ///block inprogress finished
         }
     })
+})
+app.get('/changehoneyalonsostatus1', auth, (req, res) => {
+    honeyalonsostatus = 'block'
+    return res.status(200)
+})
+app.get('/changehoneyalonsostatus2', auth, (req, res) => {
+    honeyalonsostatus = 'inprogress'
+    return res.status(200)
+})
+app.get('/changehoneyalonsostatus3', auth, (req, res) => {
+    honeyalonsostatus = 'finished'
+    return res.status(200)
 })
 app.post('/honeyalonso', auth, (req, res) => {
 
