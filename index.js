@@ -389,10 +389,7 @@ app.get('/campus', (req, res) => {
             "text": "Sede UNIR"
         }
     ]
-    return res.status(200).json({
-        success: true,
-        data
-    })
+    return res.status(200).json(data)
 })
 app.get('/typeprogram/:id', (req, res) => {
     let data = [
@@ -461,10 +458,9 @@ app.get('/program/:id', (req, res) => {
             "icon": "award"
         }
     ]
-    return res.status(200).json({
-        success: true,
+    return res.status(200).json(
         data
-    })
+    )
 })
 
 app.get('/plan/:id', (req, res) => {
@@ -488,10 +484,9 @@ app.get('/plan/:id', (req, res) => {
             "icon": "calendar"
         }
     ]
-    return res.status(200).json({
-        success: true,
+    return res.status(200).json(
         data
-    })
+    )
 })
 app.get('/schedule/:id', (req, res) => {
     let data = [
@@ -538,10 +533,9 @@ app.get('/schedule/:id', (req, res) => {
             "icon": "clock"
         }
     ]
-    return res.status(200).json({
-        success: true,
+    return res.status(200).json(
         data
-    })
+    )
 })
 app.get('/workplan/:id', (req, res) => {
     let data = [
