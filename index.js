@@ -2244,6 +2244,7 @@ app.post('/updateuserinformation', (req, res) => {
 })
 app.post('/createrequest/inprogress', (req, res) => {
     createrequeststatus = 'inprogress'
+    summarystate='inprogress'
     res.status(200).json({
         success: true,
     })
