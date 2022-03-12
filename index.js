@@ -394,6 +394,34 @@ app.get('/typeprogram/:id', (req, res) => {
     let data = [
         {
             "id": 0,
+            "text": "Doctorado",
+            "icon_class": "Feather",
+            "icon": "award"
+        },
+        {
+            "id": 1,
+            "text": "Maestria",
+            "icon_class": "Feather",
+            "icon": "award"
+        },
+        {
+            "text": "Especializacion",
+            "id": 2,
+            "icon_class": "Feather",
+            "icon": "award"
+        }
+    ]
+    return res.status(200).json({
+        success: true,
+        data
+    })
+})
+
+app.get('/program/:id', (req, res) => {
+   
+    let data = [
+        {
+            "id": 0,
             "text": "Doctorado en investigación en desarrollo social",
             "icon_class": "AntDesign",
             "icon": "laptop"
@@ -428,33 +456,6 @@ app.get('/typeprogram/:id', (req, res) => {
             "text": "Doctorado en investigación con énfasis en ingeniería y ciencias aplicadas",
             "icon_class": "AntDesign",
             "icon": "laptop"
-        }
-    ]
-    return res.status(200).json({
-        success: true,
-        data
-    })
-})
-
-app.get('/program/:id', (req, res) => {
-    let data = [
-        {
-            "id": 0,
-            "text": "Doctorado",
-            "icon_class": "Feather",
-            "icon": "award"
-        },
-        {
-            "id": 1,
-            "text": "Maestria",
-            "icon_class": "Feather",
-            "icon": "award"
-        },
-        {
-            "text": "Especializacion",
-            "id": 2,
-            "icon_class": "Feather",
-            "icon": "award"
         }
     ]
     return res.status(200).json(
