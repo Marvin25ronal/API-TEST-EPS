@@ -73,9 +73,9 @@ let cursos = {
                         finish: "11:00 am"
                     },
                     {
-                        name:"Martes",
-                        start:"2:00 am",
-                        finish:"3:00 pm",
+                        name: "Martes",
+                        start: "2:00 am",
+                        finish: "3:00 pm",
                     }
                 ],
                 "building": "T3",
@@ -101,9 +101,9 @@ let cursos = {
                         finish: "11:00 am"
                     },
                     {
-                        name:"Martes",
-                        start:"2:00 am",
-                        finish:"3:00 pm",
+                        name: "Martes",
+                        start: "2:00 am",
+                        finish: "3:00 pm",
                     }
                 ],
                 "building": "T4",
@@ -128,9 +128,9 @@ let cursos = {
                         finish: "11:00 am"
                     },
                     {
-                        name:"Martes",
-                        start:"2:00 am",
-                        finish:"3:00 pm",
+                        name: "Martes",
+                        start: "2:00 am",
+                        finish: "3:00 pm",
                     }
                 ],
                 "building": "T4",
@@ -154,9 +154,9 @@ let cursos = {
                         finish: "11:00 am"
                     },
                     {
-                        name:"Martes",
-                        start:"2:00 am",
-                        finish:"3:00 pm",
+                        name: "Martes",
+                        start: "2:00 am",
+                        finish: "3:00 pm",
                     }
                 ],
                 "building": "T4",
@@ -305,7 +305,7 @@ app.get('/monthyear/:id', (req, res) => {
 })
 app.get('/calendar/:id/:year/:month', (req, res) => {
     const months = []
-    const month = parseInt(req.params.month)+1
+    const month = parseInt(req.params.month) + 1
     const year = parseInt(req.params.year)
     const maximum = diasEnUnMes(month, year)
     const count = randomIntFromInterval(1, 6)
@@ -2242,10 +2242,23 @@ app.post('/updateuserinformation', (req, res) => {
     });
 
 })
+app.post('/createrequest/inprogress', (req, res) => {
+    createrequeststatus = 'inprogress'
+    res.status(200).json({
+        success: true,
+    })
+})
+app.post('/createrequest/finished', (req, res) => {
+    createrequeststatus = 'finished'
+    res.status(200).json({
+        success: true,
+    })
+})
+let createrequeststatus = 'inprogress'
 app.get('/createrequestconfiguration', auth, (req, res) => {
     //TODO: Pasar el endpoint
     let data = {
-        status: 'finished',//inprogress|block|finished
+        status: createrequeststatus,//inprogress|block|finished
         personalInformation: {
             status: 'inprogress',
         },
@@ -2491,11 +2504,11 @@ app.get('/recordinformation', auth, (req, res) => {
         }
     })
 })
-app.get('/programtype',(req,res)=>{
+app.get('/programtype', (req, res) => {
     return res.status(200).json({
         success: true,
         data: {
-            modality:'doctorado'
+            modality: 'doctorado'
         }
     })
 })
