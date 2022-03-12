@@ -305,7 +305,7 @@ app.get('/monthyear/:id', (req, res) => {
 })
 app.get('/calendar/:id/:year/:month', (req, res) => {
     const months = []
-    const month = parseInt(req.params.month)
+    const month = parseInt(req.params.month)+1
     const year = parseInt(req.params.year)
     const maximum = diasEnUnMes(month, year)
     const count = randomIntFromInterval(1, 6)
@@ -350,7 +350,7 @@ app.get('/calendar/:id/:year/:month', (req, res) => {
 })
 app.get('/Document/:doc', (req, res) => {
     let document = req.params.doc
-    if (document == '123456789') {
+    if (document == '2991120550101') {
         let data = {
             document: '1234456789',
             first_name: 'Yaiza',
@@ -358,7 +358,7 @@ app.get('/Document/:doc', (req, res) => {
             first_last_name: 'Pineda',
             second_last_name: 'Gonzalez',
             phone: '12345678',
-            cell_phone: '1111111',
+            cell_phone: '12345678',
             email: 'yaiza1@gmail.com'
         }
         return res.status(200).json({
@@ -371,7 +371,6 @@ app.get('/Document/:doc', (req, res) => {
             data: null
         })
     }
-
 })
 app.get('/campus', (req, res) => {
     let data = [
@@ -2225,27 +2224,7 @@ app.get('/stepsconfiguration', auth, (req, res) => {
         data: data
     })
 })
-app.get('/createrequestconfiguration', auth, (req, res) => {
-    //TODO: Pasar el endpoint
-    let data = {
-        status: 'inprogress',
-        personalInformation: {
-            status: 'finished',
-        },
-        workInformation: {
-            status: 'inprogress'
-        },
-        academicInformation: {
-            status: 'inprogress'
-        }
-    }
-    res.status(200).json({
-        success: true,
-        data: data
-    })
-})
-
-app.put('/updateuserinformation', auth, (req, res) => {
+app.post('/updateuserinformation', (req, res) => {
     upload(req, res, function (err) {
         if (err) {
             console.log(err)
@@ -2263,6 +2242,27 @@ app.put('/updateuserinformation', auth, (req, res) => {
     });
 
 })
+app.get('/createrequestconfiguration', auth, (req, res) => {
+    //TODO: Pasar el endpoint
+    let data = {
+        status: 'inprogress',
+        personalInformation: {
+            status: 'inprogress',
+        },
+        workInformation: {
+            status: 'inprogress'
+        },
+        academicInformation: {
+            status: 'inprogress'
+        }
+    }
+    res.status(200).json({
+        success: true,
+        data: data
+    })
+})
+
+
 app.post('/postwork', [auth], (req, res) => {
     console.log(req.body)
     return res.status(200).json({
@@ -2490,6 +2490,14 @@ app.get('/recordinformation', auth, (req, res) => {
         }
     })
 })
+app.get('/programtype',(req,res)=>{
+    return res.status(200).json({
+        success: true,
+        data: {
+            modality:'doctorado'
+        }
+    })
+})
 app.post('/archivos', (req, res) => {
     upload(req, res, function (err) {
         if (err) {
@@ -2512,6 +2520,7 @@ app.post('/archivos', (req, res) => {
     });
 
 })
+
 const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
     console.log('App running on port: ', PORT)
