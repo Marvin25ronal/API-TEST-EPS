@@ -838,12 +838,12 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "days": [
                         {
                             name: "Lunes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "10:00 am",
+                            finish: '11:00 pm'
                         },
                         {
                             name: "Martes",
-                            start: "00:00 am",
+                            start: "12:00 am",
                             finish: "12:00 pm"
                         }
                     ],
@@ -858,13 +858,13 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "days": [
                         {
                             name: "Lunes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "13:00 am",
+                            finish: '14:00 pm'
                         },
                         {
                             name: "Martes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "04:00 am",
+                            finish: '04:00 pm'
                         }
                     ],
                     "building": "Edificio II",
@@ -878,13 +878,13 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "days": [
                         {
                             name: "Lunes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "05:00 am",
+                            finish: '06:00 pm'
                         },
                         {
                             name: "Jueves",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "01:00 am",
+                            finish: '02:00 pm'
                         }
                     ],
                     "building": "T3",
@@ -898,13 +898,13 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "days": [
                         {
                             name: "Lunes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "01:00 am",
+                            finish: '02:00 pm'
                         },
                         {
                             name: "Sabado",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "01:00 am",
+                            finish: '02:00 pm'
                         }
                     ],
                     "building": "T3",
@@ -918,8 +918,8 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "days": [
                         {
                             name: "Lunes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "01:00 am",
+                            finish: '02:00 pm'
                         }
                     ],
                     "building": "T3",
@@ -940,8 +940,8 @@ app.get('/assigmentcourses', auth, (req, res) => {
                     "days": [
                         {
                             name: "Lunes",
-                            start: "00:00 am",
-                            finish: '00:00 pm'
+                            start: "01:00 am",
+                            finish: '02:00 pm'
                         }
                     ],
                     "building": "T4",
