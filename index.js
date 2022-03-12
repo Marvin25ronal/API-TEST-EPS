@@ -2245,7 +2245,7 @@ app.post('/updateuserinformation', (req, res) => {
 app.get('/createrequestconfiguration', auth, (req, res) => {
     //TODO: Pasar el endpoint
     let data = {
-        status: 'inprogress',
+        status: 'finished',//inprogress|block|finished
         personalInformation: {
             status: 'inprogress',
         },
@@ -2256,6 +2256,7 @@ app.get('/createrequestconfiguration', auth, (req, res) => {
             status: 'inprogress'
         }
     }
+    //TODO: RETORNAR INFORMACION
     res.status(200).json({
         success: true,
         data: data
