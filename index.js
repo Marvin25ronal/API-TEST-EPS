@@ -165,10 +165,11 @@ let cursos = {
         }
     ]
 }
+//1234567891244 18
 
 app.post('/login', (req, res) => {
     let data = req.body
-    if (data.user == '1' && data.password == '1') {
+    if ((data.user == '1850306960101' || data.user == '3417752902106'||data.user=='3003686820101'||'1234567891235'||'2991120550103'||'1234567891244') && data.password == '1') {
         const token = jwt.sign(
             {
                 user_id: 1,
@@ -215,32 +216,38 @@ app.get('/optionslogin', auth, (req, res) => {
         ],
         career_type: [
             {
-                "id": 0,
-                "text": "Doctorado 1",
+                "id": 90,
+                "text": "Doctorado 90",
                 "icon_class": "Entypo",
                 "icon": "book"
             },
             {
-                "id": 1,
+                "id": 45,
                 "text": "Maestria 1",
                 "icon_class": "Entypo",
                 "icon": "book"
             },
             {
-                "id": 2,
-                "text": "Maestria 2",
+                "id": 60,
+                "text": "Maestria 60",
                 "icon_class": "Entypo",
                 "icon": "book"
             },
             {
-                "id": 3,
-                "text": "Maestria 3",
+                "id": 98,
+                "text": "Maestria 98",
                 "icon_class": "Entypo",
                 "icon": "book"
             },
             {
-                "id": 4,
-                "text": "Maestria 4",
+                "id": 68,
+                "text": "Maestria 68",
+                "icon_class": "Entypo",
+                "icon": "book"
+            },
+            {
+                "id": 102,
+                "text": "Maestria 102",
                 "icon_class": "Entypo",
                 "icon": "book"
             }
@@ -363,12 +370,12 @@ app.get('/Document/:doc', (req, res) => {
         }
         return res.status(200).json({
             success: true,
-            data
+            data: [data]
         })
     } else {
         return res.status(200).json({
             success: false,
-            data: null
+            data: []
         })
     }
 })
@@ -390,7 +397,7 @@ app.get('/campus', (req, res) => {
     ]
     return res.status(200).json(data)
 })
-app.get('/typeprogram/:id', (req, res) => {
+app.get('/typeprogram', (req, res) => {
     let data = [
         {
             "id": 0,
@@ -411,14 +418,11 @@ app.get('/typeprogram/:id', (req, res) => {
             "icon": "award"
         }
     ]
-    return res.status(200).json({
-        success: true,
-        data
-    })
+    return res.status(200).json(data)
 })
 
-app.get('/program/:id', (req, res) => {
-   
+app.get('/program', (req, res) => {
+
     let data = [
         {
             "id": 0,
@@ -463,7 +467,7 @@ app.get('/program/:id', (req, res) => {
     )
 })
 
-app.get('/plan/:id', (req, res) => {
+app.get('/plan', (req, res) => {
     let data = [
         {
             "id": 0,
@@ -564,10 +568,7 @@ app.get('/workplan/:id', (req, res) => {
             "icon_class": "MaterialCommunityIcons"
         }
     ]
-    return res.status(200).json({
-        success: true,
-        data
-    })
+    return res.status(200).json(data)
 })
 
 app.post('/register', (req, res) => {
@@ -1110,11 +1111,13 @@ app.get('/questions', (req, res) => {
             "questions": [
                 {
                     "title": "¿Quiénes son considerados estudiantes de primer ingreso?",
-                    "answer": "Son aquellas personas que por primera vez ingresan a la Universidad. Artículo 10º. Del Reglamento de Administración Estudiantil."
+                    "answer": "Son aquellas personas que por primera vez ingresan a la Universidad. Artículo 10º. Del Reglamento de Administración Estudiantil.",
+                    link: 'https://www.npmjs.com/package/react-native-crypto-aes-cbc'
                 },
                 {
                     "title": "¿Qué es la inscripción?",
-                    "answer": "De acuerdo al artículo 14 del Reglamento de Administración Estudiantil, consiste en la admisión legal del solicitante al haber cumplido con los requisitos de ley. Este proceso se realiza en el Departamento de Registro y Estadística con todos los requisitos establecidos. En el caso de los Centros Universitarios, Escuelas de Enfermería e Institutos Tecnológicos el Departamento de Registro y Estadística recibe y revisa los expedientes junto con boleta bancaria y tarjeta CIDPI, verificando que cuenten con los documentos necesarios para ser inscritos. Sí procede, realiza inscripción y devuelve las boletas bancarias selladas y firmadas. Sí no procede informa a la unidad académica sobre la situación particular de cada expediente."
+                    "answer": "De acuerdo al artículo 14 del Reglamento de Administración Estudiantil, consiste en la admisión legal del solicitante al haber cumplido con los requisitos de ley. Este proceso se realiza en el Departamento de Registro y Estadística con todos los requisitos establecidos. En el caso de los Centros Universitarios, Escuelas de Enfermería e Institutos Tecnológicos el Departamento de Registro y Estadística recibe y revisa los expedientes junto con boleta bancaria y tarjeta CIDPI, verificando que cuenten con los documentos necesarios para ser inscritos. Sí procede, realiza inscripción y devuelve las boletas bancarias selladas y firmadas. Sí no procede informa a la unidad académica sobre la situación particular de cada expediente.",
+                    link: 'https://www.npmjs.com/package/react-native-crypto-aes-cbc'
                 }
             ]
         },
@@ -1123,11 +1126,13 @@ app.get('/questions', (req, res) => {
             "questions": [
                 {
                     "title": "¿Cuáles son los requisitos de inscripción?",
-                    "answer": "Una fotografía tamaño cédula Tarjeta de Orientación Vocacional Constancia original de pruebas de conocimientos básicos y específicos. Solicitud de ingreso impresa (debe llenarla el interesado vía internet) Fotostática del título en 5”x 7 “ de estudio fotográfico. Cierre de pensum con firmas y sellos en original (sólo para estudiantes de reciente graduación). Certificación general de estudios con firmas y sellos en original Certificación de la partida de nacimiento extendida por RENAP."
+                    "answer": "Una fotografía tamaño cédula Tarjeta de Orientación Vocacional Constancia original de pruebas de conocimientos básicos y específicos. Solicitud de ingreso impresa (debe llenarla el interesado vía internet) Fotostática del título en 5”x 7 “ de estudio fotográfico. Cierre de pensum con firmas y sellos en original (sólo para estudiantes de reciente graduación). Certificación general de estudios con firmas y sellos en original Certificación de la partida de nacimiento extendida por RENAP.",
+                    link: 'https://www.npmjs.com/package/react-native-crypto-aes-cbc'
                 },
                 {
                     "title": "¿Quiénes están exonerados de las pruebas de conocimientos básicos y específicos?",
-                    "answer": "-Los profesionales graduados en cualquier universidad de Guatemala, que cuenten como mínimo con el grado académico de licenciatura."
+                    "answer": "-Los profesionales graduados en cualquier universidad de Guatemala, que cuenten como mínimo con el grado académico de licenciatura.",
+                    link: 'https://www.npmjs.com/package/react-native-crypto-aes-cbc',
                 }
             ]
         },
@@ -1136,11 +1141,13 @@ app.get('/questions', (req, res) => {
             "questions": [
                 {
                     "title": "¿Qué es la solicitud de ingreso?",
-                    "answer": "Es el procedimiento mediante el cual el aspirante selecciona la carrera que desea estudiar, llenando los datos solicitados en la página www.registro.usac.edu.gt opción primer ingreso, Solicitud de Ingreso, la cual le asigna la fecha y lugar de preinscripción."
+                    "answer": "Es el procedimiento mediante el cual el aspirante selecciona la carrera que desea estudiar, llenando los datos solicitados en la página www.registro.usac.edu.gt opción primer ingreso, Solicitud de Ingreso, la cual le asigna la fecha y lugar de preinscripción.",
+                    link: 'https://www.npmjs.com/package/react-native-crypto-aes-cbc'
                 },
                 {
                     "title": "¿Qué sucede si un aspirante escoge una carrera diferente a la que desea?",
-                    "answer": "Tacha con una línea lo impreso, escribe lo correcto a lapicero y lo firma, siempre y cuando la carrera sea impartida para primer ingreso."
+                    "answer": "Tacha con una línea lo impreso, escribe lo correcto a lapicero y lo firma, siempre y cuando la carrera sea impartida para primer ingreso.",
+                    link: 'https://www.npmjs.com/package/react-native-crypto-aes-cbc',
                 }
             ]
         },
@@ -2245,7 +2252,7 @@ app.post('/updateuserinformation', (req, res) => {
 })
 app.post('/createrequest/inprogress', (req, res) => {
     createrequeststatus = 'inprogress'
-    summarystate='inprogress'
+    summarystate = 'inprogress'
     res.status(200).json({
         success: true,
     })
@@ -2403,7 +2410,7 @@ app.get('/summary', auth, (req, res) => {
     return res.status(200).json({
         success: true,
         data: {
-            state: summarystate,
+            state: 'finished',
             ticket_url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
             request_url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
         }
@@ -2536,11 +2543,46 @@ app.post('/archivos', (req, res) => {
     });
 
 })
+app.get('/token/:token', (req, res) => {
+    return res.status(200).json({
+        success: true,
+        data: {
+            document: "2991120550101",
+            first_name: "Marvin",
+            second_name: "Ronaldo",
+            first_last_name: "Martinez",
+            second_last_name: "Marroquin",
+            name: "Marvin Ronaldo Martinez Marroquin"
+        }
+    })
+})
+
+app.post('/token/:token', (req, res) => {
+    return res.status(200).json({
+        success: true,
+        data: {
+            document: "2991120550101",
+            first_name: "Marvin",
+            second_name: "Ronaldo",
+            first_last_name: "Martinez",
+            second_last_name: "Marroquin",
+            name: "Marvin Ronaldo Martinez Marroquin"
+        }
+    })
+})
+
 
 const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
     console.log('App running on port: ', PORT)
+    var aes256 = require('aes256');
+    var key = 'lacarne3est4r1ca3nl05domin9osd3f';
+    var plaintext = 'eyJpdiI6IjI0Q3d2TW9UaFIvY1drTHlmNGdqc1E9PSIsInZhbHVlIjoiMWdJRUc3REoxSWFsSk42Snk0WnFjNy9ueGUzcnBHd3BiRWVrMFVGbm51Zz0iLCJtYWMiOiIwNTc3NDQ2YjYxMWU4YjQ4ZTBiNDMwYTkzNjUzNzFiNzM5M2Y5Y2EzZmMzNzc1NTEwMDA5MmZjM2UzNGZlZGFiIiwidGFnIjoiIn0=/eyJpdiI6IlVmVDhZNWc1clJZNFBIU0tPR3k4alE9PSIsInZhbHVlIjoiTllSYjFralV1bmw3Y2MwVm5xaksrZz09IiwibWFjIjoiZmE4MWIyNWI5OTI3ODljN2E4ZjU3NWM0ZWIyMzc4NjMxMDFlN2Q5YjQ3ZDUxYWQwYWExYTMxYzdmYjYxMjczMCIsInRhZyI6IiJ9';
+    var encrypted = aes256.encrypt(key, 'ya no sale');
+    console.log(encrypted)
+    var decrypted = aes256.decrypt(key, plaintext);
+    console.log(decrypted)
 })
 
 
-//minuto 35
+//minuto 35fe
