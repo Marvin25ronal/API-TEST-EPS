@@ -169,7 +169,7 @@ let cursos = {
 
 app.post('/login', (req, res) => {
     let data = req.body
-    if ((data.user == '1850306960101' || data.user == '3417752902106'||data.user=='3003686820101'||'1234567891235'||'2991120550103'||'1234567891244') && data.password == '1') {
+    if ((data.user == '1850306960101' || data.user == '3417752902106' || data.user == '3003686820101' || '1234567891235' || '2991120550103' || '1234567891244') && data.password == '1') {
         const token = jwt.sign(
             {
                 user_id: 1,
@@ -2568,6 +2568,23 @@ app.post('/token/:token', (req, res) => {
             second_last_name: "Marroquin",
             name: "Marvin Ronaldo Martinez Marroquin"
         }
+    })
+})
+ const CONDITIONS_AND_TERMS = 'Las actualizaciones clave incluyen más información sobre lo siguiente: Legal terms are required under some countries’ consumer protection regulations. Even if you are not legally required to have terms and conditions, they are critical to maintaining your rights and protecting your business.'
+app.get('/termsandconditions',(req, res)=> {
+    let data={
+        description: CONDITIONS_AND_TERMS,
+        conditions:[
+            "Condiciones generales",
+            "Condiciones especiales",
+            "Condiciones especiales",
+            "Condiciones especiales",
+            "Condiciones especiales",
+        ]
+    }
+    return res.status(200).json({
+        success: true,
+        data: data
     })
 })
 
