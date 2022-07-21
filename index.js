@@ -216,8 +216,8 @@ app.get('/optionslogin', auth, (req, res) => {
         ],
         career_type: [
             {
-                "id": 90,
-                "text": "Doctorado 90",
+                "id": 100,
+                "text": "Doctorado 100",
                 "icon_class": "Entypo",
                 "icon": "book"
             },
@@ -1519,7 +1519,7 @@ app.get('/candidateinfo', auth, (req, res) => {
     }
     return res.status(200).json({
         success: true,
-        data
+        data: [data]
     })
 })
 const fs = require('fs')
@@ -2166,31 +2166,33 @@ app.get('/entrega_expediente', auth, (req, res) => {
                 color: '#D1D1D1'
             },
             file: {
-                type: 'png',
-                uri: 'https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
-            }
+                uri: 'http://www.africau.edu/images/default/sample.pdf'
+            },
+            uploadType: "pdf"
         },
         {
             id: 1,
             title: 'Hoja de vida con fotografía impresa',
-            description: '',
+            description: 'Hola como estan porfa suban los docs que se necesitan para descargar toda la documentacion',
             status: {
                 text: 'Pendiente de entrega',
                 color: '#DD4A48',
             },
             file: {
-                type: 'pdf',
                 uri: 'http://www.africau.edu/images/default/sample.pdf'
-            }
+            },
+            filename: 'Hoja de vida.pdf',
+            uploadType: "image"
         },
         {
             id: 2,
             title: 'Fotocopia de Título y/o acta de graduación',
-            description: '',
+            description: 'Este es otro ejemplo de pdf',
             status: {
                 text: 'Entregado',
                 color: '#95CD41'
-            }
+            },
+            uploadType: "pdf"
         }
     ]
     res.status(200).json({
@@ -2206,7 +2208,7 @@ app.get('/stepsconfiguration', auth, (req, res) => {
             id: 0,
             name: 'Solicitud de admisión programa',
             status: 'inprogress',
-            view: 'ApplicatioAdmissionProgram'
+            view: 'AplicatioAdmissionProgram'
         },
         {
             id: 1,
@@ -2266,18 +2268,21 @@ app.post('/createrequest/finished', (req, res) => {
 let createrequeststatus = 'inprogress'
 app.get('/createrequestconfiguration', auth, (req, res) => {
     //TODO: Pasar el endpoint
-    let data = {
-        status: createrequeststatus,//inprogress|block|finished
-        personalInformation: {
+    let data = [
+
+        {
+            id: "PersonalInformationData",
             status: 'inprogress',
         },
-        workInformation: {
+        {
+            id: "WorkInformationData",
             status: 'inprogress'
         },
-        academicInformation: {
+        {
+            id: "AcademicInformationData",
             status: 'inprogress'
         }
-    }
+    ]
     //TODO: RETORNAR INFORMACION
     res.status(200).json({
         success: true,
@@ -2570,11 +2575,11 @@ app.post('/token/:token', (req, res) => {
         }
     })
 })
- const CONDITIONS_AND_TERMS = 'Las actualizaciones clave incluyen más información sobre lo siguiente: Legal terms are required under some countries’ consumer protection regulations. Even if you are not legally required to have terms and conditions, they are critical to maintaining your rights and protecting your business.'
-app.get('/termsandconditions',(req, res)=> {
-    let data={
+const CONDITIONS_AND_TERMS = 'Las actualizaciones clave incluyen más información sobre lo siguiente: Legal terms are required under some countries’ consumer protection regulations. Even if you are not legally required to have terms and conditions, they are critical to maintaining your rights and protecting your business.'
+app.get('/termsandconditions', (req, res) => {
+    let data = {
         description: CONDITIONS_AND_TERMS,
-        conditions:[
+        conditions: [
             "Condiciones generales",
             "Condiciones especiales",
             "Condiciones especiales",
