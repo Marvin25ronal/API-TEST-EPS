@@ -7,6 +7,7 @@ const auth = require("./middlewares/auth");
 var faker = require('faker');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+const images=require('./images')
 require("dotenv").config();
 app.use(cors())
 app.use(morgan('dev'))
@@ -972,7 +973,7 @@ app.get('/userinfo', auth, (req, res) => {
         average: 89.9,
         document_id: '123456789',
         student_card: '987654321',
-        img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80'
+        img: images.profile
     }
     return res.status(200).json({
         success: true,
