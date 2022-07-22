@@ -1516,7 +1516,7 @@ app.get('/candidateinfo', auth, (req, res) => {
         nationality_id: 1,
         nationality_name: 'Guatemala',
         gender: 1,
-        img: 'https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg'
+        img: images.profile
     }
     return res.status(200).json({
         success: true,
